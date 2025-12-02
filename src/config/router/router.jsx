@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { auth, onAuthStateChanged } from '../../firebase/firebase'
 import { Flex, Spin } from 'antd';
 import SettingPage from "../../components/Setting";
-import UsersPage from "../../components/Users";
+import UsersPage from "../../pages/Users.jsx";
 
 
 
