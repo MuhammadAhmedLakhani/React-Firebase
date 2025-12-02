@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import LayoutApp from "../components/Layout";
 
 function Profile() {
@@ -5,6 +6,7 @@ function Profile() {
         <div>
             <LayoutApp>
                 <h1>Profile Page</h1>
+                <Outlet/>
             </LayoutApp>
 
         </div>

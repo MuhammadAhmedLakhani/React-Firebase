@@ -6,6 +6,8 @@ import Home from "../../pages/Home";
 import { useEffect, useState } from "react";
 import { auth, onAuthStateChanged } from '../../firebase/firebase'
 import { Flex, Spin } from 'antd';
+import SettingPage from "../../components/Setting";
+import UsersPage from "../../components/Users";
 
 
 
@@ -17,7 +19,7 @@ import { Flex, Spin } from 'antd';
 function AppRouter() {
 
     let [isUser, setIsUser] = useState(false)
-    let[loader,setLoader] = useState(true)
+    let [loader, setLoader] = useState(true)
 
 
 
@@ -60,25 +62,43 @@ function AppRouter() {
         <div>
 
             {
-                loader?
-                
-                
-                <div style={{display:"flex",justifyContent:"center",alignItems:"center",height:"100vh"}}>
-            <Spin tip="Loading" size="large">
-                
-            </Spin>
-            </div>
+                loader ?
 
-            :    
 
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={isUser ? <Profile /> : <Login />} />
-                    <Route path="/signup" element={isUser ? <Profile /> : <Signup />} />
-                    <Route path="/profile" element={isUser ? <Profile /> : <Navigate to={'/'} />} />
-                </Routes>
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+                        <Spin tip="Loading" size="large">
 
-            </BrowserRouter>
+                        </Spin>
+                    </div>
+
+                    :
+
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path="/" element={isUser ? <Profile /> : <Login />} />
+                            <Route path="/signup" element={isUser ? <Profile /> : <Signup />} />
+
+
+                            <Route path="/profile" element={isUser ? <Profile /> : <Navigate to={'/'} />} >
+
+                    //nested routing with help of Outlet
+
+                                <Route path="setting" element={<SettingPage />} />
+
+
+                            </Route>
+
+
+                            <Route path="/users" element={isUser ? <UsersPage /> : <Navigate to={'/'} />} ></Route>
+
+
+
+
+
+
+                        </Routes>
+
+                    </BrowserRouter>
             }
         </div>
 

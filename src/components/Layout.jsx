@@ -11,7 +11,6 @@ import { auth, signOut } from '../firebase/firebase'
 
 
 
-
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
@@ -25,12 +24,17 @@ import {
 
 
 import { Button, Layout, Menu, theme } from 'antd';
+import { Navigate, useNavigate } from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
 
 
 
 
 const LayoutApp = ({ children }) => {
+
+
+    let navigate = useNavigate()
+
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer, borderRadiusLG },
@@ -88,14 +92,14 @@ const LayoutApp = ({ children }) => {
                         },
                         {
                             key: '3',
-                            icon: <UploadOutlined />,
-                            label: 'nav 3',
+                            icon: <UserOutlined />,
+                            label: 'Users',
+                            onClick:()=> navigate("/users")
                         },
                         {
                             key: '4',
                             icon: <LogoutOutlined />,
                             label: 'Logout',
-                            onClick: () => logoutUser()
                         },
                     ]}
                 />
