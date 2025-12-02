@@ -1,7 +1,12 @@
-function Profile(){
+import LayoutApp from "../components/Layout";
+
+function Profile() {
     return (
         <div>
-            <h1>Profile Page</h1>
+            <LayoutApp>
+                <h1>Profile Page</h1>
+            </LayoutApp>
+
         </div>
     )
 }
