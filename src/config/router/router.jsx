@@ -4,7 +4,8 @@ import Signup from "../../pages/Signup";
 import Profile from "../../pages/Profile";
 import Home from "../../pages/Home";
 import { useEffect, useState } from "react";
-import {auth ,onAuthStateChanged} from '../../firebase/firebase'
+import { auth, onAuthStateChanged } from '../../firebase/firebase'
+import { Flex, Spin } from 'antd';
 
 
 
@@ -13,23 +14,30 @@ import {auth ,onAuthStateChanged} from '../../firebase/firebase'
 
 
 
+function AppRouter() {
 
-function AppRouter(){
+    let [isUser, setIsUser] = useState(false)
+    let[loader,setLoader] = useState(true)
 
-    let [isUser , setIsUser] = useState(false)
-    
-    
-    useEffect(()=>{
+
+
+
+
+
+
+
+    useEffect(() => {
         onAuthStateChanged(auth, (user) => {
-            if(user){
+            if (user) {
                 setIsUser(true)
             }
-            else{
+            else {
                 setIsUser(false)
             }
-      })
-    },[]);
-        
+
+            setLoader(false)
+        })
+    }, []);
 
 
 
@@ -45,15 +53,34 @@ function AppRouter(){
 
 
 
-    return(
-        <BrowserRouter>
-            <Routes>
-                <Route  path="/"  element = {isUser? <Profile/> :     <Home/>} />
-                <Route  path="/signup"  element = { isUser? <Profile/>  :<Signup/>} />
-                <Route  path="/profile"  element = {isUser?  <Profile/>: <Navigate to={'/'} />} />
-            </Routes>
-        
-        </BrowserRouter>
+
+    return (
+
+        // <Spin/> 
+        <div>
+
+            {
+                loader?
+                
+                
+                <div style={{display:"flex",justifyContent:"center",alignItems:"center",height:"100vh"}}>
+            <Spin tip="Loading" size="large">
+                
+            </Spin>
+            </div>
+
+            :    
+
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={isUser ? <Profile /> : <Login />} />
+                    <Route path="/signup" element={isUser ? <Profile /> : <Signup />} />
+                    <Route path="/profile" element={isUser ? <Profile /> : <Navigate to={'/'} />} />
+                </Routes>
+
+            </BrowserRouter>
+            }
+        </div>
 
     )
 }
