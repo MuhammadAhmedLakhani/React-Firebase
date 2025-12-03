@@ -1,7 +1,8 @@
+import { useState } from "react";
 import LayoutApp from "../components/Layout.jsx";
 import TableApp from "../components/Table.jsx"
 
-const data = [
+let data = [
   {
     key: '1',
     name: 'John Brown',
@@ -41,59 +42,60 @@ const data = [
 
 function UsersPage() {
 
-    let PaginatedArray = ()=>{
 
-        let arr = []
-        for(var i = 0;i < data.length;i++){
-            var temp = []
-            for(var j = 0;j < 1;j++){
-                temp.push(data[i])
-            }
-            arr.push(temp)
-        }
-        return arr
+  let[page , setpage] = useState(0)
+
+  let PaginatedArray = () => {
+
+    let arr = []
+    for (var i = 0; i < data.length; i++) {
+      var temp = []
+      for (var j = 0; j < 1; j++) {
+        temp.push(data[i])
+      }
+      arr.push(temp)
     }
+    return arr
+  }
+  
+
+let paginate = (i)=>{
+
+  setpage(i)
+
+
+}
 
 
 
-    // let result  = PaginatedArray().map((v,i)=>{
-    //      return i
-    // })
-
-    // console.log("result",result)
 
 
+  return (
+    <div>
+      <LayoutApp >
+        <h1>Users Page </h1>
+        <TableApp data={PaginatedArray()[page]} />
+        <div >
 
-
-
-
-
-    return (
-        <div>
-            <LayoutApp >
-            <h1>Users Page </h1>
-            <TableApp data={data} />
-                <div >
-
-                {
-                    PaginatedArray().map((v,i)=>{
-                        return <button key={i}>{i + 1}</button>
-                    })
-                }
-
-                </div>
-                
-                
-
-
-
-            </LayoutApp>
-            
-
+          {
+            PaginatedArray().map((v, i) => {
+              return <button onClick={()=>paginate(i)} key={i}>{i + 1}</button>
+            })
+          }
 
         </div>
 
-    )
+
+
+
+
+      </LayoutApp>
+
+
+
+    </div>
+
+  )
 }
 
 
