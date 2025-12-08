@@ -100,7 +100,8 @@ const LayoutApp = ({ children }) => {
                             key: '4',
                             icon: <LogoutOutlined />,
                             label: 'Logout',
-                            onClick:()=>logoutUser()
+                            onClick:()=>logoutUser() 
+                            ///logoutUser function with help of firebase auth
                         },
                     ]}
                 />
