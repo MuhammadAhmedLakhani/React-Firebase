@@ -100,6 +100,7 @@ const LayoutApp = ({ children }) => {
                             key: '4',
                             icon: <LogoutOutlined />,
                             label: 'Logout',
+                            onClick:()=>logoutUser()
                         },
                     ]}
                 />

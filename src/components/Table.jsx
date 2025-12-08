@@ -50,4 +50,5 @@ const columns = [
 ];
 
 const TableApp = ({data}) => <Table columns={columns} dataSource={data} pagination = {false} />;
+
 export default TableApp;

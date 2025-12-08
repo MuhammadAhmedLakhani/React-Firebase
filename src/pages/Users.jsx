@@ -43,28 +43,30 @@ let data = [
 function UsersPage() {
 
 
-  let[page , setpage] = useState(0)
 
-  let PaginatedArray = () => {
+
+  let [page, setpage] = useState(0)
+
+  let paginatedArray = () => {
 
     let arr = []
-    for (var i = 0; i < data.length; i++) {
-      var temp = []
-      for (var j = 0; j < 1; j++) {
-        temp.push(data[i])
-      }
-      arr.push(temp)
-    }
+    let chunksize = 2
+    for (var i = 0; i < data.length; i+=chunksize) {
+        arr.push([data.slice(i,i+chunksize)])
+
+    }    
     return arr
   }
-  
 
-let paginate = (i)=>{
-
-  setpage(i)
+  console.log(paginatedArray())
+  console.log("page",paginatedArray()[1])
 
 
-}
+
+
+
+
+
 
 
 
@@ -74,12 +76,15 @@ let paginate = (i)=>{
     <div>
       <LayoutApp >
         <h1>Users Page </h1>
-        <TableApp data={PaginatedArray()[page]} />
+        <TableApp data={data} />
+        {
+          console.log("inside",paginatedArray()[page])
+        }
         <div >
 
           {
-            PaginatedArray().map((v, i) => {
-              return <button onClick={()=>paginate(i)} key={i}>{i + 1}</button>
+            paginatedArray().map((v, i) => {
+              return <button  key={i}>{i + 1}</button>
             })
           }
 
